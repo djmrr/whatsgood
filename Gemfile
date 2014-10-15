@@ -61,3 +61,7 @@ gem 'simplecov', :require => false, :group => :test
 gem 'eventfulapi'
 gem "font-awesome-rails"
 gem 'modernizr-rails'
+
+#adding gems for js to ruby ease
+# gem 'therubyracer', require: 'v8'
+# gem 'execjs'

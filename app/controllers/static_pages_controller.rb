@@ -2,7 +2,15 @@ class StaticPagesController < ApplicationController
 
   CATEGORIES = 'music,comedy,sports'
   CITY ='Salt Lake City'
-  
+
+
+  # def get_the_location_amigo
+  #   source = File.read(Rails.root.join("app/assets/javascripts/locationgrab.js"))
+  #   context = ExecJS.compile(source)
+  #   @whatisthis = context.call("locationNation")
+  # end
+
+
   def home
     @date = 'Future'
     if current_user
@@ -12,6 +20,13 @@ class StaticPagesController < ApplicationController
       default_eventful(@date)
     end 
     make_map(@events)
+    # stuffz
+    @cookielat = request.cookies['sconsnaggedLat=']
+    @cookielon = request.cookies['sconsnaggedLon=']
+    # @loccookie = cookies[]
+    # source = File.read(Rails.root.join("app/assets/javascripts/locationgrab.js"))
+    # context = ExecJS.compile(source)
+    # @whatisthis = context.call("locationNation")
   end
 
   def today

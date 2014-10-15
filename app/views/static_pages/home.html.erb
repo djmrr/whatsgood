@@ -39,6 +39,9 @@
 
 
 <script type="text/javascript">
+
+/////////////////////////////////////////////////
+
   var handler = Gmaps.build('Google');
   handler.buildMap({
       internal: {id: 'multi_marks'},
@@ -95,4 +98,9 @@
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
   });
+</script>
+
+<script type="text/javascript">
+  alert(<%=raw @cookielat.to_json%>);
+  alert(<%=raw @cookielon.to_json%>);
 </script>
