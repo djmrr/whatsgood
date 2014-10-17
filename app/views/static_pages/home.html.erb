@@ -1,6 +1,8 @@
 <input type="hidden" name="page-number" value="1" id="page-number">
 <input type="hidden" name="can-load-more" value="true" id="can-load-more">
 <input type="hidden" name="search-date" value="<%= @date %>" id="search-date">
+<input type='visible' name='latitude' value='' id='latitudesnagg'>
+<input type='visible' name='longitude' value='' id='longitudesnagg'>
 
 
 <div class='row'>
@@ -100,7 +102,3 @@
   });
 </script>
 
-<script type="text/javascript">
-  alert(<%=raw @cookielat.to_json%>);
-  alert(<%=raw @cookielon.to_json%>);
-</script>
