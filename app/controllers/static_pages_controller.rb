@@ -21,13 +21,24 @@ class StaticPagesController < ApplicationController
     end 
     make_map(@events)
     # stuffz
-    @cookielat = request.cookies['sconsnaggedLat=']
-    @cookielon = request.cookies['sconsnaggedLon=']
+    # @cookielat = request.cookies['sconsnaggedLat=']
+    # @cookielon = request.cookies['sconsnaggedLon=']
+
+
+    @latlatlat = ''
+    @lonlonlon = ''
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
     # @loccookie = cookies[]
     # source = File.read(Rails.root.join("app/assets/javascripts/locationgrab.js"))
     # context = ExecJS.compile(source)
     # @whatisthis = context.call("locationNation")
   end
+
 
   def today
     @date = 'Today'

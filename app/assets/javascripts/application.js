@@ -18,6 +18,16 @@
 //= require gmaps/google
 //= require isotope.pkgd.min
 //= require imagesloaded.pkgd.min
+
+// window.onload = function(event) {
+//     event.stopPropagation(true);
+//     $.getScript("app/assets/javascripts/locationgrab.js", function(){
+//    		alert("Script loaded and executed.");
+// 	});
+// };
+
+
+
 $(document).ready(function() {
 
  
