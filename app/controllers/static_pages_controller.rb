@@ -19,10 +19,8 @@ class StaticPagesController < ApplicationController
     else
       default_eventful(@date)
     end 
-    # stuffz
-    # @cookielat = request.cookies['sconsnaggedLat=']
-    # @cookielon = request.cookies['sconsnaggedLon=']
-
+   
+    make_map(@events)
 
 
     @latlatlat = params[:latlatlat]
@@ -33,12 +31,7 @@ class StaticPagesController < ApplicationController
       format.json { render json: [@latlatlat, @lonlonlon] }
     end
 
-    # @loccookie = cookies[]
-    # source = File.read(Rails.root.join("app/assets/javascripts/locationgrab.js"))
-    # context = ExecJS.compile(source)
-    # @whatisthis = context.call("locationNation")
-
-   make_map(@events)
+  
   end
 
 

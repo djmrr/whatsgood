@@ -61,18 +61,20 @@ $(window).load(function partyOverhurrr(){
   var my_id_lon = $("#longitudesnagg").val();
   // var url = '/static_pages/home';
   // debugger;
-  $.ajax({
-    url: '/static_pages/home.json',
-    type: 'GET',
-    // beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-    data: {
-      latlatlat: $("#latitudesnagg").val(), 
-      lonlonlon: $("#longitudesnagg").val()
-    }
-  }).done(function(data){
-    console.log(data)
-    alert('snagged the coordzz');
-  });
+  setTimeout(function() {
+    $.ajax({
+      url: '/static_pages/home.json',
+      type: 'GET',
+      // beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+      data: {
+        latlatlat: $("#latitudesnagg").val(), 
+        lonlonlon: $("#longitudesnagg").val()
+      }
+    }).done(function(data){
+      console.log(data)
+      alert('snagged the coordzz');
+    });
+  }, 400);
 }
 ); 
 
