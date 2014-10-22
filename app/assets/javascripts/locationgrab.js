@@ -18,6 +18,8 @@
     //document.getElementByID("longitudesnagg").innerHTML().value = new Float (JSON.parse(position.coords.longitude));
   }
 
+
+
   // $.ajax({ 
   //     type: 'POST', 
   //     url: 'static_pages/home', 
@@ -52,20 +54,19 @@
 
 // $(window).load(function()
 
-// $(document).ready.(function(){
-//   var my_id_lat = $(this).find(#latitudesnagg).html().val;
-//   var my_id_lon = $(this).find(#longitudesnagg).html().val;
-//   var url = window.location.href;
-//   $.ajax(url,{
-//     data: {my_id_lat : @latlatlat, my_id_lon : @lonlonlon}
-//   }).done(function(data){
-//     alert('snagged the coordzz');
-//     console.log(my_id_lat, my_id_lon);
-//   })
-//   $.get(url,{@latlatlat : my_id_lat, @lonlonlon : my_id_lon}).done(function(){
-//     alert('snagged the coordzzz');
-//   });
-// });
+function partyOverhurrr(){
+  var my_id_lat = $("#latitudesnagg").val();
+  var my_id_lon = $("#longitudesnagg").val();
+  var url = '/';
+  $.ajax(url,{
+    type: 'POST',
+    data: {'latlatlat' : my_id_lat, 'lonlonlon' : my_id_lon}
+  }).done(function(data){
+    alert('snagged the coordzz');
+    console.log(my_id_lat, my_id_lon);
+  });
+}
+
 
 
 

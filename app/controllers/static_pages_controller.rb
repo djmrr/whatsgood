@@ -25,8 +25,8 @@ class StaticPagesController < ApplicationController
     # @cookielon = request.cookies['sconsnaggedLon=']
 
 
-    @latlatlat = ''
-    @lonlonlon = ''
+    @latlatlat = params[:latlatlat]
+    @lonlonlon = params[:lonlonlon]
 
     respond_to do |format|
       format.html
