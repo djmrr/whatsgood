@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  protect_from_forgery :except => [:home]
 
   CATEGORIES = 'music,comedy,sports'
   CITY ='Salt Lake City'
@@ -25,12 +26,13 @@ class StaticPagesController < ApplicationController
     # @cookielon = request.cookies['sconsnaggedLon=']
 
 
+
     @latlatlat = params[:latlatlat]
     @lonlonlon = params[:lonlonlon]
 
     respond_to do |format|
       format.html
-      format.js
+      format.json { render json: [@latlatlat, @lonlonlon] }
     end
 
     # @loccookie = cookies[]
@@ -135,7 +137,7 @@ class StaticPagesController < ApplicationController
   end  
 
   def get_location
-    current_user ? "#{current_user.latitude},#{current_user.longitude}" : CITY
+    current_user ? "#{current_user.latitude},#{current_user.longitude}" : "#{@latlatlat},#{@lonlonlon}"
   end  
 
 end

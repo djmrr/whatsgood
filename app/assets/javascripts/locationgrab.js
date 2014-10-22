@@ -54,19 +54,39 @@
 
 // $(window).load(function()
 
-function partyOverhurrr(){
+
+
+$(window).load(function partyOverhurrr(){
   var my_id_lat = $("#latitudesnagg").val();
   var my_id_lon = $("#longitudesnagg").val();
-  var url = '/';
-  $.ajax(url,{
-    type: 'POST',
-    data: {'latlatlat' : my_id_lat, 'lonlonlon' : my_id_lon}
+  // var url = '/static_pages/home';
+  // debugger;
+  $.ajax({
+    url: '/static_pages/home.json',
+    type: 'GET',
+    // beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    data: {
+      latlatlat: $("#latitudesnagg").val(), 
+      lonlonlon: $("#longitudesnagg").val()
+    }
   }).done(function(data){
+    console.log(data)
     alert('snagged the coordzz');
-    console.log(my_id_lat, my_id_lon);
   });
 }
+); 
 
+// $.ajax({
+//       url: '/staff/accept_answer',
+//       type: 'PUT',
+//       data: {
+//         accepted: $(this).prop('checked'),
+//         answer_id: $(this).attr('id')
+//       }
+//     });
+
+
+// partyOverhurrr(); 
 
 
 
