@@ -11,18 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141014031708) do
+ActiveRecord::Schema.define(version: 20141021173344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "acts", force: true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.string   "website"
+  create_table "activities", force: true do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -40,16 +49,6 @@ ActiveRecord::Schema.define(version: 20141014031708) do
 
   add_index "categorizations", ["category_id"], name: "index_categorizations_on_category_id", using: :btree
   add_index "categorizations", ["user_id"], name: "index_categorizations_on_user_id", using: :btree
-
-  create_table "event_acts", force: true do |t|
-    t.integer  "event_id"
-    t.integer  "act_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "event_acts", ["act_id"], name: "index_event_acts_on_act_id", using: :btree
-  add_index "event_acts", ["event_id"], name: "index_event_acts_on_event_id", using: :btree
 
   create_table "events", force: true do |t|
     t.datetime "start_time"
@@ -69,20 +68,45 @@ ActiveRecord::Schema.define(version: 20141014031708) do
     t.string   "image_url"
     t.integer  "user_id"
     t.string   "eventful_id"
+    t.string   "category_list"
   end
 
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
   add_index "events", ["venue_id"], name: "index_events_on_venue_id", using: :btree
 
-  create_table "interests", force: true do |t|
-    t.string   "interest_type"
-    t.string   "genre"
-    t.integer  "user_id"
+  create_table "follows", force: true do |t|
+    t.string   "follower_type"
+    t.integer  "follower_id"
+    t.string   "followable_type"
+    t.integer  "followable_id"
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
-  add_index "interests", ["user_id"], name: "index_interests_on_user_id", using: :btree
+  add_index "follows", ["followable_id", "followable_type"], name: "fk_followables", using: :btree
+  add_index "follows", ["follower_id", "follower_type"], name: "fk_follows", using: :btree
+
+  create_table "likes", force: true do |t|
+    t.string   "liker_type"
+    t.integer  "liker_id"
+    t.string   "likeable_type"
+    t.integer  "likeable_id"
+    t.datetime "created_at"
+  end
+
+  add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
+  add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
+
+  create_table "mentions", force: true do |t|
+    t.string   "mentioner_type"
+    t.integer  "mentioner_id"
+    t.string   "mentionable_type"
+    t.integer  "mentionable_id"
+    t.datetime "created_at"
+  end
+
+  add_index "mentions", ["mentionable_id", "mentionable_type"], name: "fk_mentionables", using: :btree
+  add_index "mentions", ["mentioner_id", "mentioner_type"], name: "fk_mentions", using: :btree
+
 
   create_table "users", force: true do |t|
     t.string   "email",                                           default: "",    null: false
@@ -108,20 +132,16 @@ ActiveRecord::Schema.define(version: 20141014031708) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "is_admin",                                        default: false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "venue_acts", force: true do |t|
-    t.integer  "venue_id"
-    t.integer  "act_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "venue_acts", ["act_id"], name: "index_venue_acts_on_act_id", using: :btree
-  add_index "venue_acts", ["venue_id"], name: "index_venue_acts_on_venue_id", using: :btree
 
   create_table "venues", force: true do |t|
     t.text     "location"

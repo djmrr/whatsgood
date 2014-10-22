@@ -1,4 +1,5 @@
 <input type="hidden" name="page-number" value="1" id="page-number">
+<input type="hidden" value="<%= @result['page_count'] %>" id="total-pages">
 <input type="hidden" name="can-load-more" value="true" id="can-load-more">
 <input type="hidden" name="search-date" value="<%= @date %>" id="search-date">
 <input type='visible' name='latitude' value='' id='latitudesnagg' class='locationnabber'>
@@ -8,36 +9,32 @@
 <div class='row'>
   <div class="events-list col-xs-12 col-md-7 col-lg-8">
     <%= render partial: 'events/events', :locals => {:events => @events} %>
-    <h2 id="loading-status" class="pager"></h2>
   </div>
   <div class='allmaps col-md-5 col-lg-4 visible-md-block visible-lg-block'>
     <div id="multi_marks"></div>
 
     <% if current_user %>
-      <div class="btn-group cat-boxes" id="cat-boxes" data-toggle="buttons">
-        <% current_user.categories.each do |cat| %>
-        <label class="btn btn-primary">
-          <input type="radio" name="options" value=".<%= cat.cat_id %>"checked> <%= cat.name %>
-        </label>
-        <% end %>
-        <label class="btn btn-primary active">
-          <input type="radio" name="options" value="*"checked> All
-        </label>
-      </div>
+      <%= render 'filter' %>
     <% end %>
-
-    <div class="stats"><h1>whatsgood</h1>
-      <ul>
-        <li>Total items: <%= @result['total_items'] %></li>
-        <li>Page Size: <%= @result['page_size'] %></li>
-        <li>Pages: <%= @result['page_count'] %></li>
-        <li>Page no: <%= @result['page_number'] %></li>
-        <li>Search time: <%= @result['search_time'].round(2) %> seconds</li>
-      </ul>  
+    <div class="eventful-badge eventful-large">
+      <img src="http://api.eventful.com/images/powered/eventful_139x44.gif"
+        alt="Local Events, Concerts, Tickets">
+      <p><a href="http://eventful.com/">Events</a> by Eventful</p>
     </div>
+
+    <!-- <div class="stats"><h1>whatsgood</h1>
+      <ul>
+        <li>Total items: <%#= @result['total_items'] %></li>
+        <li>Page Size: <%#= @result['page_size'] %></li>
+        <li>Pages: <%#= @result['page_count'] %></li>
+        <li>Page no: <%#= @result['page_number'] %></li>
+        <li>Search time: <%#= @result['search_time'].round(2) %> seconds</li>
+      </ul>  
+    </div> -->
   </div>
 </div>
 
+<%= render partial: 'static_pages/mapjs' %>
 
 
 <script type="text/javascript">

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find(params[:user_id])
+    @activities = PublicActivity::Activity.order('created_at desc').where(owner_id: @user.followees(User), owner_type: "User")
   end
 
   def edit
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
   end  
 
   def account_update_params
-    params.require(:user).permit(:is_admin, :first_name, :latitude, :longitude, :last_name, :address, :description, :email, :password, :password_confirmation, :current_password, :category_ids => [])
+    params.require(:user).permit(:avatar, :is_admin, :first_name, :latitude, :longitude, :last_name, :address, :description, :email, :password, :password_confirmation, :current_password, :category_ids => [])
   end
 
 end

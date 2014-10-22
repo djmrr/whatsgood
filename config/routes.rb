@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
 
+  get 'activities/index'
+
   get 'categories/update_eventful_categories', as: 'update_categories'
+
+  get 'socialization/follow', as: 'follow'
+  get 'socialization/unfollow', as: 'unfollow'
 
   resources :categories, only: [:destroy, :index]
 
@@ -19,14 +24,12 @@ Rails.application.routes.draw do
 
   get 'static_pages/load_more_results' => 'static_pages#load_more_results'
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations' , omniauth_callbacks: "omniauth_callbacks"}
   resources :users, :only => [:show, :index, :edit, :update, :destroy] do
     get '/profile', to: 'users#profile', as: :profile
+    put '/profile', to: 'users#update'
     resources :events
   end  
-    
-  
-  resources :venues
   resources :acts
 
 

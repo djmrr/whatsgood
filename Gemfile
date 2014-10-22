@@ -37,6 +37,11 @@ gem 'devise'
 gem 'geocoder'
 gem 'gmaps4rails' 
 
+###### Picturzzz ####
+gem 'paperclip'
+gem 'cocaine'
+gem 'rmagick'
+
 gem 'bootstrap-sass', '~> 3.2.0'
 
 gem 'rails_12factor'
@@ -62,6 +67,13 @@ gem 'eventfulapi'
 gem "font-awesome-rails"
 gem 'modernizr-rails'
 
+
 #adding gems for js to ruby ease
 # gem 'therubyracer', require: 'v8'
 # gem 'execjs'
+
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem "socialization"
+gem 'public_activity'
+
